@@ -1,6 +1,6 @@
 # automatic-python
 use python to create some automatic tools for convenience
-## word-name-formatter 实验报告格式化器
+## word-name-formatter 实验报告文件名格式化器
 作为班长的我, 常为同学们提交实验报告时文件名不统一而感到烦恼, 帮他们一个个地修改是一件很麻烦的事.
 于是我写了一个"实验报告格式化器", 用了它, 以后收word的时候再也不用为此而焦虑了. 
 ### (最简单快捷的)使用方法
