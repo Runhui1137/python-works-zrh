@@ -5,13 +5,12 @@ import csv
 import re
 
 # 配置信息
-docx_path = "D:/2020春课堂/DOTNET/实验1/182实验报告"       # 目标文件夹的路径
-csv_path = './182.csv'                                  # csv文件路径, 用于录入学生学号等信息
-reg_patt = u'2018\d\d\d\d\d\d'                          # 正则表达式, 用于在docx中查找学号
+docx_path = "D:\\2020春课堂\\DOTNET\\实验1\\软件182-实验一"        # 目标文件夹的路径
+sno_patt = u'2018\d\d\d\d\d\d'                                 # 正则表达式, 用于在docx中查找学号
+sname_patt = u'姓名\s*\S*'                                      # 正则表达式, 用于在docx中查找姓名
 # 要格式化实验报告文件名, 直接修改上免变量的值即可
 #########################################################################
 word = client.Dispatch("Word.Application")    # 用于doc格式转换为docx的工具
-student_map = dict()                          # 学生字典, 学号为key, 用于存储学生的信息, 这些信息将用于生成新的文件名
 
 def get_files():
     return os.listdir(docx_path)
@@ -40,17 +39,24 @@ def modify_single_file(filename):
     # 打开并遍历docx, 使用正则表达式进行匹配学号
     re_ans = None
     dx = docx.Document(docx=docx_filepath)
+    sno = ""
+    sname = ""
     for line in dx.paragraphs :
-        re_ans = re.search(string=line.text, pattern=reg_patt)
+        re_ans = re.search(string=line.text, pattern=sno_patt)
         if re_ans != None:
+            sno = re_ans.group().split(" ")[-1]
             break
-    # 若学号读取成功, 则通过student_map得到该学生的信息, 生成目标文件名, 对源文件完成重命名工作
+
+    for line in dx.paragraphs :
+        re_ans = re.search(string=line.text, pattern=sname_patt)
+        if re_ans != None:
+            sname = re_ans.group().split(" ")[-1]
+            break
+
     new_name = ''
     if re_ans != None:
-        sno = re_ans.group()
-        info = student_map[sno]
         ###### 在这里可以修改重命名文件的格式
-        new_name = "{0} {1}.{2}".format(info[1], info[0], extension)
+        new_name = "{0} {1}.{2}".format(sname, sno, extension)
         new_path = docx_path+ "\\" + new_name
         os.rename(filepath, new_path)
     # 删除临时生成的docx文件
@@ -66,12 +72,6 @@ def save_single_doc_as_docx(filepath, filename):
     doc.Close()
     return docx_filepath
 
-# 从CSV文件中读取并录入学生信息到student_map中
-def get_info():
-    with open(csv_path) as file:
-        for item in csv.reader(file) :
-            t = student_map[item[0]] = item[0:2]    # 根据我这个csv文件, item[0]即为学号
-
 def main():
     global docx_path
     docx_path = os.path.abspath(docx_path)
@@ -81,8 +81,6 @@ def main():
     # 获取目标文件夹下的所有文件
     print(docx_path)
     file_list = get_files()
-    # 获取学生信息(这些信息后来将用于生成文件名)
-    get_info()
     # 对每个文件重命名
     for file in file_list:
         modify_single_file(file)
