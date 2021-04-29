@@ -1,9 +1,8 @@
 '''
     作者: 张润晖
-    2021年4月29日 13:44:54 完成
-    开源地址: 
-    本程序基于pyechart v1开发, 0.x版本的pyecharts无法运行该程序
-
+    完成时间: 2021年4月29日 13:44:54
+    开源地址: https://github.com/Runhui1137/python-works-zrh
+    注意事项: 本程序基于pyechart v1开发, 0.x版本的pyecharts无法运行该程序
 '''
 
 import csv
