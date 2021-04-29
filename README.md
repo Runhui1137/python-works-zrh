@@ -10,3 +10,6 @@ use python to create some automatic tools for convenience
 1. doc文件无法直接读取, 因此在读取之前进行另存, 另存目录为./temp文件夹, 程序运行完毕后可手动删除
 2. 这个程序很简单, 如果会一点python编程, 相信你会有更多的食用方法
 3. 本程序乃本人受实验报告重命名所困扰, 一气之下而成, 并不完善, bug可能也很多. 若此程序有幸为您效劳, 遇到bug还请息怒(还请原谅我的锅>_<)
+
+### 班级手机运营商使用统计(Python作业)
+使用pyecharts和python中的csv模块进行开发, 通过读取csv文件获取同学们的手机号, 统计三大运营商使用人数, 并通过pyechart实现数据可视化(饼状图)
