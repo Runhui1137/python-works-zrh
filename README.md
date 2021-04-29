@@ -1,4 +1,4 @@
-# automatic-python
+# python-works-zrh's
 use python to create some automatic tools for convenience
 ### word-name-formatter 实验报告文件名格式化器
 我常为同学们提交实验报告时文件名不统一而感到烦恼, 一个个地修改是一件很麻烦的事. 
